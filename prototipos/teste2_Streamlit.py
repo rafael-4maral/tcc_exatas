@@ -7,9 +7,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# ==================================
-# CONFIGURAÇÃO DA API
-# ==================================
+# configuração da api
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 # Modelo configurado para trazer o pacote completo estruturado em JSON
@@ -21,9 +19,7 @@ model = genai.GenerativeModel(
 st.title("Tutor de Kanji com Inteligência Artificial")
 st.subheader("Exercícios adaptados para estudantes brasileiros")
 
-# ==================================
-# SIDEBAR - CONFIGURAÇÕES
-# ==================================
+# sidebar - configurações
 with st.sidebar:
     st.header("Configurações")
     nivel = st.selectbox("Escolha o nível JLPT:", ["N5", "N4", "N3", "N2", "N1"])
@@ -87,9 +83,7 @@ if st.button("Gerar Novo Exercício"):
         except Exception as e:
             st.error(f"A API está sem cotas disponíveis no momento. Mensagem original: {e}")
 
-# ==================================
-# INTERFACE DO EXERCÍCIO
-# ==================================
+# interface do exercício
 if st.session_state.dados_exercicio:
     dados = st.session_state.dados_exercicio
     

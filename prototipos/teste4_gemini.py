@@ -5,9 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# ==================================
-# CONFIGURAÇÃO DA API
-# ==================================
+# configuração da api
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 # Configurando o modelo principal para responder estritamente em JSON
@@ -18,9 +16,7 @@ model = genai.GenerativeModel(
 
 model_feedback = genai.GenerativeModel("gemini-2.5-flash")
 
-# ==================================
-# ESCOLHA DO NÍVEL
-# ==================================
+# escolha do nível
 print("\nEscolha o nível JLPT:")
 print("1 - N5")
 print("2 - N4")
@@ -32,9 +28,7 @@ nivel_escolhido = input("\nDigite o número: ")
 niveis = {"1": "N5", "2": "N4", "3": "N3", "4": "N2", "5": "N1"}
 nivel = niveis.get(nivel_escolhido, "N5")
 
-# ==================================
-# ESCOLHA DO CONTEXTO
-# ==================================
+# escolha do contexto
 print("\nEscolha o contexto:")
 print("1 - Cotidiano")
 print("2 - Restaurante")
@@ -56,9 +50,7 @@ contextos = {
 contexto_escolhido = input("\nDigite o número: ")
 contexto = contextos.get(contexto_escolhido, "Livre")
 
-# ==================================
-# PROMPT DE GERAÇÃO OTIMIZADO E CURTO
-# ==================================
+# prompt de geração otimizado e curto
 prompt_geracao = f"""
 Você é um professor de japonês especializado em alunos brasileiros.
 Crie um exercício Cloze curto e perfeitamente adaptado para um estudante brasileiro.
@@ -121,9 +113,7 @@ except Exception as e:
     print("\nErro ao processar o formato do exercício. Tente rodar o script novamente.")
     exit()
 
-# ==================================
-# APRESENTAÇÃO DO EXERCÍCIO
-# ==================================
+# apresentação do exercício
 print("\n==============================")
 print("EXERCÍCIO GERADO")
 print("==============================\n")
@@ -139,9 +129,7 @@ resposta_aluno = input("\nDigite a alternativa escolhida (A, B, C ou D): ").stri
 correta = dados_exercicio['alternativa_correta'].strip().upper()
 status_resultado = "ACERTOU" if resposta_aluno == correta else "ERRADO"
 
-# ==================================
-# PROMPT DE FEEDBACK CUSTOMIZADO
-# ==================================
+# prompt de feedback customizado
 prompt_feedback = f"""
 Você é um professor de japonês especializado em alunos brasileiros.
 O aluno acabou de responder um exercício de preenchimento de lacunas com dois Kanjis. Forneça o feedback pedagógico baseado nos dados abaixo.

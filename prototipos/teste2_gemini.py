@@ -4,18 +4,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# ==================================
-# CONFIGURAÇÃO DA API
-# ==================================
-
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 model = genai.GenerativeModel("gemini-2.5-flash")
 
-# ==================================
-# ESCOLHA DO NÍVEL
-# ==================================
-
+# escolha do nível
 print("\nEscolha o nível JLPT:")
 
 print("1 - N5")
@@ -36,10 +29,7 @@ niveis = {
 
 nivel = niveis.get(nivel_escolhido, "N5")
 
-# ==================================
-# ESCOLHA DO CONTEXTO
-# ==================================
-
+# escolha do contexto
 print("\nEscolha o contexto:")
 
 print("1 - Cotidiano")
@@ -64,10 +54,7 @@ contexto_escolhido = input("\nDigite o número: ")
 
 contexto = contextos.get(contexto_escolhido, "Livre")
 
-# ==================================
-# PROMPT DE GERAÇÃO
-# ==================================
-
+# prompt de geração
 prompt = f"""
 Você é um professor de japonês especializado em alunos brasileiros.
 
@@ -89,7 +76,6 @@ Regras:
 - NÃO mostre a resposta correta.
 - NÃO mostre o gabarito.
 - NÃO explique a resposta ainda.
-- NÃO utilize formatação Markdown ou asteriscos no texto do exercício.
 
 Regras adicionais por nível:
 
@@ -132,34 +118,22 @@ D) ...
 
 """
 
-# ==================================
-# GERAÇÃO DO EXERCÍCIO
-# ==================================
-
+# geração do exercício
 response = model.generate_content(prompt)
 
-# ==================================
-# MOSTRAR EXERCÍCIO
-# ==================================
-
+# mostrar exercício
 print("\n==============================")
 print("EXERCÍCIO GERADO")
 print("==============================\n")
 
 print(response.text)
 
-# ==================================
-# RESPOSTA DO ALUNO
-# ==================================
-
+# resposta do aluno
 resposta_aluno = input(
     "\nDigite a alternativa escolhida (A, B, C ou D): "
 )
 
-# ==================================
-# PROMPT DE FEEDBACK
-# ==================================
-
+# prompt de feedback
 prompt_feedback = f"""
 Você é um professor de japonês especializado em alunos brasileiros.
 
@@ -193,28 +167,13 @@ Finalize com:
 - uma dica de memorização;
 - uma dica curta de estudo.
 
-REGRAS CRUCIAIS DE FORMATAÇÃO (LEIA COM ATENÇÃO):
-- NÃO use NENHUMA formatação Markdown no seu texto.
-- É terminantemente PROIBIDO o uso de asteriscos (como ** ou *) para simular negrito ou itálico.
-- NÃO utilize hashtags (#) para criar títulos.
-- Escreva um texto completamente limpo, puro e legível para terminal de texto.
-- Use quebras de linha duplas (pular linhas) para separar os parágrafos.
-- Se precisar organizar itens, use hífens comuns (-) sem nenhum asterisco.
-- Para criar títulos ou destacar seções, use apenas LETRAS MAIÚSCULAS simples (exemplo: SIGNIFICADO DO KANJI:, DICA DO PROFESSOR:), sem nenhum caractere especial ao redor.
-
 Responda de forma amigável e pedagógica.
 """
 
-# ==================================
-# GERAR FEEDBACK
-# ==================================
-
+# gerar feedback
 feedback = model.generate_content(prompt_feedback)
 
-# ==================================
-# MOSTRAR FEEDBACK
-# ==================================
-
+# mostrar feedback
 print("\n==============================")
 print("FEEDBACK DO PROFESSOR")
 print("==============================\n")

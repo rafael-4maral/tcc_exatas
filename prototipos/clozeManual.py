@@ -43,8 +43,6 @@ frase_pt = "Eu comi sushi ontem"
 
 doc = nlp(frase_pt)
 
-
-
 print("\nAnalisando frase:\n")
 
 # detectar substantivos (possíveis palavras para kanji)
@@ -58,8 +56,6 @@ for token in doc:
 
 print("\nPalavras candidatas para exercício:")
 print(palavras_alvo)
-
-
 
 # mapeamento simples (protótipo)
 dicionario = {

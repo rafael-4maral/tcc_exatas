@@ -30,7 +30,6 @@ niveis = {
 
 nivel = niveis.get(nivel_escolhido, "N5")
 
-
 # ESCOLHA DO CONTEXTO
 
 print("\nEscolha o contexto:")
@@ -57,10 +56,7 @@ contexto_escolhido = input("\nDigite o número: ")
 
 contexto = contextos.get(contexto_escolhido, "Livre")
 
-# ==================================
-# PROMPT
-# ==================================
-
+# prompt
 prompt = f"""
 Você é um professor de japonês especializado em alunos brasileiros.
 
@@ -104,7 +100,6 @@ Não mostre o gabarito.
 # CHAMADA AO GEMINI
 
 response = model.generate_content(prompt)
-
 
 # EXIBIÇÃO
 
